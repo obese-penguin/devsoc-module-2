@@ -47,6 +47,7 @@ form.addEventListener("submit", (e) => {
 					newStyle.innerText =` 
 						#usr-name-display{
 							position: absolute;
+							padding: 50px;
 							height: 10%;
 							width: 100%;
 						}
@@ -72,7 +73,22 @@ form.addEventListener("submit", (e) => {
 	repo = fetch(URL + search + "/repos")
 		.then(result => result.json())
 		.then(data => 
-			{
+			{	
+				let output_repos = document.getElementById("usr-repos")
+				output_repos.insertAdjacentHTML('beforeend',
+				`
+				<div id="repo-title-head">
+				<h2>Repositories</h2>
+				</div>	
+				`)
+
+				var newStyle = document.createElement("style")
+				newStyle.innerText = `
+				#usr-repos{
+					box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset; 
+				}
+				`
+				document.head.appendChild(newStyle);
 				for (let i = 0, len = data.length; i < len; i++) 
 				{
 					// display name, url, description, language
@@ -81,7 +97,6 @@ form.addEventListener("submit", (e) => {
 					if (description === null) {
 						description = ""
 					}
-					let output_repos = document.getElementById("usr-repos")
 					output_repos.insertAdjacentHTML('beforeend',
 					`
 						<div id="repo-${i}" class="repo-info">
@@ -98,8 +113,10 @@ form.addEventListener("submit", (e) => {
 					newStyle.innerText =` 
 					#repo-${i}{
 						position: relative;
-						height: 100px;
-						/*border: 2px solid black;*/
+						min-height: 95px;
+						word-wrap: break-word;
+						border-bottom: 1px solid gray;
+						overflow-y: scroll;
 					}
 					
 					.repo-link{
@@ -115,6 +132,8 @@ form.addEventListener("submit", (e) => {
 
 					.repo-description{
 						position: absolute;
+						display: flex;
+						padding-bottom: 5px;
 						left: 10px;
 					}
 
