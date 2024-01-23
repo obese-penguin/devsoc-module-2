@@ -19,9 +19,12 @@ form.addEventListener("submit", (e) => {
 
 	info = fetch(URL + search)
 		.then(result => result.json())
-		.then(data => 
+		.then(data =>  
 			{
-
+				Uname = data.name
+				if (Uname === null) {
+					Uname = data.login;
+				}
 				output.innerHTML = 
 				`
 				<div id="usr-repos">
@@ -30,7 +33,11 @@ form.addEventListener("submit", (e) => {
 				`
 				output.insertAdjacentHTML("afterbegin",  
 				`
-					<h1 id="usr-name-display">${data.name}</h1> 
+					<div id="usr-name-display">
+					<h1 >${Uname}</h1>
+					</div>
+					<div id="usr-usrname-display">
+					</div>
 					<div id="usr-img" >
 					</div>
 				`
@@ -42,6 +49,11 @@ form.addEventListener("submit", (e) => {
 							position: absolute;
 							height: 10%;
 							width: 100%;
+						}
+						#usr-usrname-display{
+							position: relative;
+							width: 100%
+							height: 8%;
 						}	
 					}
 					`		
@@ -103,8 +115,6 @@ form.addEventListener("submit", (e) => {
 
 					.repo-description{
 						position: absolute;
-						
-						text-align: left;
 						left: 10px;
 					}
 
@@ -112,8 +122,6 @@ form.addEventListener("submit", (e) => {
 						padding: 20px 0px 0px 20px;
 					}
 					`
-
-					
 					document.head.appendChild(newStyle)
 				}
 			})
