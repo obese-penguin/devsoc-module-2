@@ -134,7 +134,7 @@ form.addEventListener("submit", (e) => {
 						position: absolute;
 						display: flex;
 						padding-bottom: 5px;
-						left: 10px;
+						left: 22px;
 					}
 
 					.repo-info{
